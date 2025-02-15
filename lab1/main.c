@@ -3,10 +3,19 @@
 #include <math.h>
 
 int main(int argc, char *argv[]){
-    double a = 1.0, b = 6.0, c = 3.0;
+    double a, b, c;
+    // double a = 1.0, b = 6.0, c = 3.0;
     double x1, x2, d;
 
-    d = b*b - 4*a*c;
+    printf("input a: ");
+    scanf("%lf", &a);
+    printf("input b: ");
+    scanf("%lf", &b);
+    printf("input c: ");
+    scanf("%lf", &c);
+
+
+    d = pow(d, 2) - 4*a*c;
 
     if (d < 0) {
         printf("нет корней: d = %lf\n", d);
