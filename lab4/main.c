@@ -1,29 +1,19 @@
 #include <stdio.h>
-#include <math.h>
+#include "func.h"  // Подключаем заголовочный файл с объявлениями функций
 
-double triangle_perimeter(double a, double b, double c) {
-    return a + b + c;
-}
-
-double triangle_area(double a, double b, double c) {
-    double s = (a + b + c) / 2.0;
-    return sqrt(s * (s - a) * (s - b) * (s - c));
-}
-
-
-int main(int argc, char *argv[]){
+int main(int argc, char *argv[]) {
     double a, b, c;
 
-    printf("Стороны треугольника a b c: ");
+    printf("Введите длины сторон треугольника a b c: ");  // Более дружелюбное приглашение
     if (scanf("%lf %lf %lf", &a, &b, &c) != 3) {
-        fprintf(stderr, "Числа нужно было 3\n");
-        return 1;
+        fprintf(stderr, "Ошибка: Необходимо ввести три числа.\n"); // Более информативное сообщение об ошибке
+        return 1; // Возвращаем код ошибки
     }
 
-    // Проверка на корректность неравенства треугольника
+    // Проверка на корректность неравенства треугольника и положительность сторон
     if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
-        fprintf(stderr, "Не бывает такого\n");
-        return 1;
+        fprintf(stderr, "Ошибка: Треугольник с такими сторонами не существует.\n"); // Более информативное сообщение об ошибке
+        return 1; // Возвращаем код ошибки
     }
 
     // Вычисляем периметр и площадь, используя функции из triangle_utils.c
@@ -33,5 +23,5 @@ int main(int argc, char *argv[]){
     printf("Периметр треугольника: %.2lf\n", perimeter);
     printf("Площадь треугольника: %.2lf\n", area);
 
-    return 0;
+    return 0; // Указываем, что программа завершилась успешно
 }

@@ -17,7 +17,7 @@ int main(int argc, char *argv[]){
     double main_diagonal_sum = 0.0;
     double secondary_diagonal_sum = 0.0;
 
-    printf("Введите элементы массива double 3x3:\n");
+    printf("Введите элементы массива 3x3:\n");
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
             printf("Элемент [%d][%d]: ", i, j);

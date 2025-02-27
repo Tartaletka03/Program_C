@@ -4,6 +4,8 @@
         "*.ndjson": "jsonl",
         "*.dbclient-js": "javascript",
         "*.embeddedhtml": "html",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "math.h": "c",
+        "arr_func.h": "c"
     }
 }

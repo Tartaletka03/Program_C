@@ -1,0 +1,1 @@
+double** arr_sum(double** arr_1, double** arr_2, int n);
