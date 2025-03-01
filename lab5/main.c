@@ -1,17 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "arr_func.h"
+#include "func.h"
 
-/*ЗАДАНИЕ 5
-
-Разместить в динамической памяти 2 массива – 2 матрицы размерностью n на n с элементами типа double 
-(значения n и элементы массивов ввести с консоли). А также ввести с консоли знак операции: '+', '-' или '*'. 
-Написать функцию, вычисляющую сумму, разность или произведение данных матриц (их передать по указателю) и 
-возвращающую указатель на массив-результат. Разместить эту функцию в отдельном модуле (отличном от того, где располагается функция main()). 
-Выдать на консоль значения по-лученного вектора.*/
-
-
-int main(int argc, char *argv[]){
+int main(int argc, char *argv[]) {
     int n;
     printf("ВведиТЕ размер для двух массивов n на n: ");
     scanf("%d", &n);
@@ -20,10 +11,10 @@ int main(int argc, char *argv[]){
     double **arr_2;
     char c;
 
-    arr_1 = (double**)malloc(n*sizeof(double*));
-    arr_2 = (double**)malloc(n*sizeof(double*));
-    for (int i  = 0; i<n; i++) arr_1[i] = (double*)malloc(n*sizeof(double));
-    for (int i  = 0; i<n; i++) arr_2[i] = (double*)malloc(n*sizeof(double));
+    arr_1 = (double**)malloc(n * sizeof(double*));
+    arr_2 = (double**)malloc(n * sizeof(double*));
+    for (int i = 0; i < n; i++) arr_1[i] = (double*)malloc(n * sizeof(double));
+    for (int i = 0; i < n; i++) arr_2[i] = (double*)malloc(n * sizeof(double));
 
     double **arr_3;
 
@@ -43,20 +34,34 @@ int main(int argc, char *argv[]){
         }
     }
 
-    printf("Введите +, - или *:\n");
-    scanf("%c", &c);
+    printf("Введите +, -, или *:\n");
+    scanf(" %c", &c); // Важно добавить пробел перед %c
 
     if ('+' == c) arr_3 = arr_sum(arr_1, arr_2, n);
-
-
+    else if ('-' == c) arr_3 = arr_sub(arr_1, arr_2, n);
+    else if ('*' == c) arr_3 = arr_mul(arr_1, arr_2, n);
+    else {
+        printf("Некорректная операция\n");
+        return 1; // Или другая обработка ошибки
+    }
 
     printf("Итоговый массив:\n");
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
-            printf("%lf ", &arr_3[i][j]);
+            printf("%lf ", arr_3[i][j]); // ИСПРАВЛЕНО: убран &
         }
-        printf("/n");
+        printf("\n"); // ИСПРАВЛЕНО: Правильный перевод строки
     }
+
+   // Освобождение памяти
+    for (int i = 0; i < n; i++) {
+        free(arr_1[i]);
+        free(arr_2[i]);
+        free(arr_3[i]);
+    }
+    free(arr_1);
+    free(arr_2);
+    free(arr_3);
 
 
     return 0;
