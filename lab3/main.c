@@ -20,10 +20,12 @@ int main(int argc, char *argv[]){
         if (str[i] == 'a' || str[i] == 'b') {
             str[i] = toupper(str[i]); // Преобразуем в верхний регистр
         }
+        if (str[i] == '.') {
+            str[i] = '!';
+        }
     }
 
     printf("Измененная строка: %s\n", str);
 
     return 0;
 }
-

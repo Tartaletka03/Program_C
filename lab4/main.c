@@ -5,10 +5,10 @@
 int main(int argc, char *argv[]) {
     double a = 1.0, b = 1.0, c = 1.0;
 
-    printf("Введите длины сторон треугольника a b c: ");  // Более дружелюбное приглашение
+    printf("Введите длины сторон треугольника a b c: ");
     if (scanf("%lf %lf %lf", &a, &b, &c) != 3) {
-        fprintf(stderr, "Ошибка: Необходимо ввести три числа.\n"); // Более информативное сообщение об ошибке
-        return 1; // Возвращаем код ошибки
+        fprintf(stderr, "Нужно 3 числа\n");
+        return 1;
     }
 
     // Проверка на корректность неравенства треугольника и положительность сторон
@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    // Вычисляем периметр и площадь, используя функции из triangle_utils.c
+    // Вычисляем периметр и площадь
     double perimeter = triangle_perimeter(a, b, c);
     double area = triangle_area(a, b, c);
 
