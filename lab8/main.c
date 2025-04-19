@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_NAME 50
+#define MAX_NAME 40
 #define FILE_NAME "D:\\Education\\Program_C\\lab8\\people.txt"
 
 typedef struct {
@@ -12,7 +12,7 @@ typedef struct {
     float height;
 } Person;
 
-//  выбор пользователя
+// выбор пользователя
 int sort_field1;
 int sort_field2;
 
@@ -30,12 +30,6 @@ int readFromFile(Person **people, int *count) {
 
         *people = (Person *)realloc(*people, (*count) * sizeof(Person));
 
-        if (*people == NULL) {
-            printf("На выделилась память\n");
-            fclose(file);
-            return 0;
-        }
-
         strcpy((*people)[*count - 1].name, temp.name);
         (*people)[*count - 1].year = temp.year;
         (*people)[*count - 1].gender = temp.gender;
@@ -47,25 +41,7 @@ int readFromFile(Person **people, int *count) {
     return 1; // гуд
 }
 
-// Функция для записи
-int writeToFile(Person *people, int count) {
-    FILE *file = fopen(FILE_NAME, "w");
-
-    if (file == NULL) {
-        printf("Не удалось открыть файл %s для записи\n", FILE_NAME);
-        return 0; // потрачено
-    }
-
-    for (int i = 0; i < count; i++) {
-        fprintf(file, "%s %d %c %f\n", people[i].name, people[i].year, people[i].gender, people[i].height);
-    }
-
-    fclose(file); // Закрываем файл
-
-    return 1; // гуд х2
-}
-
-// Функции для сравнения (используются для сортировки)
+// функции сравненияч
 int compareByYear(const void *a, const void *b) {
     Person *p1 = (Person *)a;
     Person *p2 = (Person *)b;
@@ -153,10 +129,10 @@ int main() {
     }
 
     // Получаем выбор пользователя
-    printf("Выберите первое поле для сортировки (1: Год, 2: Имя, 3: Пол, 4: Рост): ");
+    printf("Выберите первое поле для сортировки (1: Дата рождения, 2: Имя, 3: Пол, 4: Рост): ");
     scanf("%d", &sort_field1);
 
-    printf("Выберите второе поле (0 - нет, 1: Год, 2: Имя, 3: Пол, 4: Рост): ");
+    printf("Выберите второе поле (0 - нет, 1: Дата рождения, 2: Имя, 3: Пол, 4: Рост): ");
     scanf("%d", &sort_field2);
 
     // Сортируем данные
@@ -176,23 +152,6 @@ int main() {
         }
     } else { // Сортируем по нескольким полям
         qsort(people, count, sizeof(Person), compareMultiple);
-    }
-
-    // Выводим отсортированные данные
-    printf("\nОтсортированные данные:\n");
-    printData(people, count);
-
-    // Предлагаем сохранить данные в файл
-    char save;
-    printf("Сохранить отсортированные данные в файл? (y/n): ");
-    scanf(" %c", &save); // Пробел перед %c важен!
-
-    if (save == 'y' || save == 'Y') {
-        if (writeToFile(people, count)) {
-            printf("Данные сохранены в файл %s\n", FILE_NAME);
-        } else {
-            printf("Не удалось сохранить данные в файл.\n");
-        }
     }
 
     // Освобождаем память
